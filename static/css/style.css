@@ -1,0 +1,91 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 21cm;
+    height: 28.8cm;
+    border: 2px solid #ccc;
+    overflow: hidden;
+}
+
+.content {
+    margin-top: 5.5cm;
+    margin-left: 2.5cm;
+    background-color: aqua;
+}   
+
+.customer-to {
+
+}
+
+.customer-address {
+    margin-top: -0.3cm;            
+    font-size: 0.3cm;            
+}
+
+.customer-tin {
+    margin-top: 0.3cm;          
+}
+
+.customer-bns {
+    margin-top: 0.3cm;
+    padding-left: 2.1cm;
+    background-color: darkgreen;
+}        
+
+.invoice-date {
+    /* background-color: darkgreen; */
+    margin-left: 8cm;
+    margin-top: -1.5cm;
+    margin-right: 3.5cm;
+    text-align: right; 
+}
+
+.particulars-table {
+    background-color: aqua; 
+    margin-left: 1.8cm;
+    margin-top: 2cm;
+    margin-right: 1.8cm;
+    font-size: 0.35cm;
+}
+
+.table-header {
+    
+}
+
+.table-cell-qty {
+    width: 12.5%;
+}
+
+.table-cell-unit {
+    width: 12.5%;
+}
+
+.table-cell-particulars {
+    width: 50%;
+}
+
+.table-cell-amount {
+    text-align: right;
+    width: 20%;
+}
+
+.word-in-amount {
+    margin-left: 1.8cm;
+    margin-top: 0.6cm;
+    text-align: center;
+}
+
+.prepared-by {
+    margin-left: 2.5cm;
+    margin-top: 2.7cm;           
+}
+
+.approved-by {
+    margin-left: 8.2cm;
+    margin-top: -0.90cm;
+    margin-right: 3.5cm;
+}
