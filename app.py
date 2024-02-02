@@ -1,20 +1,27 @@
+import os
 import datetime
 import json
+from dotenv import load_dotenv
+
+# Flask
 from flask import Flask, render_template, request, redirect, session
+import flask_login
+
+# QuickBooks
 from intuitlib.client import AuthClient
 from intuitlib.enums import Scopes
-
-import os
-from dotenv import load_dotenv
 from quickbooks import QuickBooks
 from quickbooks.objects.invoice import Invoice
 
-
 app = Flask(__name__)
-app.secret_key = 'your secret key'
-
 # Load the stored environment variables
 load_dotenv()
+
+app.secret_key = os.getenv("SECRET_KEY")
+
+# login_manager = flask_login.LoginManager()
+# login_manager.init_app(app)
+
 
 auth_client = AuthClient(
     client_id     = os.getenv("CLIENT_ID"),
@@ -34,6 +41,12 @@ def login():
     url = auth_client.get_authorization_url([Scopes.ACCOUNTING])
     return redirect(url)
 
+@app.route('/logout')
+def logout():
+    # Clear the access token from the session
+    session.pop('access_token', None)
+    return redirect('/')
+
 @app.route('/test')
 def test():
     refresh_token = session.get('refresh_token')
@@ -52,15 +65,18 @@ def callback():
     # Store the access token, refresh token, and token expiration time in session
     session['access_token'] = auth_client.access_token  
     session['refresh_token'] = auth_client.refresh_token
-    # session['token_expires_at'] = auth_client.token_expires_at
-    # print(auth_client.access_token)
+    session['token_expires_at'] = auth_client.expires_in
 
+    return redirect('/')
+
+@app.route('/invoices')
+def invoice():
     client = QuickBooks(
         auth_client=auth_client,
         refresh_token=auth_client.refresh_token,
-        company_id='9130357842152386'
+        company_id=realm_id
     )
-
+    page = request.args.get('number', default = 1, type = int)
     invoice_number = '1010'
     invoices = Invoice.filter(DocNumber=invoice_number, qb=client)
 
@@ -68,8 +84,7 @@ def callback():
         invoice_dict = invoice.to_dict()
         invoice_json = json.dumps(invoice_dict)
         print(invoice_json)
-
-    return redirect('/')
+    return "test"
 
 if __name__ == '__main__':
     app.run(debug=True)
