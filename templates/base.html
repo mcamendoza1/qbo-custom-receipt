@@ -9,5 +9,10 @@
     {% else %}
         <button onclick="location.href='/login'">Login</button>
     {% endif %}
+
+    {% for invoice in invoices %}
+    <p>{{ invoice.DocNumber }}</p>
+    {% endfor %}
 </body>
+
 </html>

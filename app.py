@@ -1,11 +1,9 @@
 import os
-import datetime
 import json
 from dotenv import load_dotenv
 
 # Flask
-from flask import Flask, render_template, request, redirect, session
-import flask_login
+from flask import Flask, jsonify, render_template, request, redirect, session
 
 # QuickBooks
 from intuitlib.client import AuthClient
@@ -18,9 +16,6 @@ app = Flask(__name__)
 load_dotenv()
 
 app.secret_key = os.getenv("SECRET_KEY")
-
-# login_manager = flask_login.LoginManager()
-# login_manager.init_app(app)
 
 
 auth_client = AuthClient(
@@ -36,6 +31,12 @@ realm_id = os.getenv("REALM_ID")
 def index():        
     return render_template('index.html')
 
+##########################################
+#                                        #
+#  Authentication and Authorization      #
+#                                        #
+##########################################
+
 @app.route('/login')
 def login():
     url = auth_client.get_authorization_url([Scopes.ACCOUNTING])
@@ -47,6 +48,23 @@ def logout():
     session.pop('access_token', None)
     return redirect('/')
 
+@app.route('/callback')
+def callback():
+    auth_code = request.args.get('code')
+    auth_client.get_bearer_token(auth_code, realm_id=realm_id)
+    # Store the access token, refresh token, and token expiration time in session
+    session['access_token'] = auth_client.access_token  
+    session['refresh_token'] = auth_client.refresh_token
+    session['token_expires_at'] = auth_client.expires_in
+    session['realm_id'] = auth_client.realm_id
+    return redirect('/')
+
+##########################################
+#                                        #
+#  Authentication and Authorization      #
+#                                        #
+##########################################
+
 @app.route('/test')
 def test():
     refresh_token = session.get('refresh_token')
@@ -57,34 +75,21 @@ def test():
     print(realm_id)
     return auth_client.access_token
 
-@app.route('/callback')
-def callback():
-    auth_code = request.args.get('code')
-    auth_client.get_bearer_token(auth_code, realm_id=realm_id)
 
-    # Store the access token, refresh token, and token expiration time in session
-    session['access_token'] = auth_client.access_token  
-    session['refresh_token'] = auth_client.refresh_token
-    session['token_expires_at'] = auth_client.expires_in
-
-    return redirect('/')
-
-@app.route('/invoices')
-def invoice():
+@app.route('/invoice/<invoice_number>')
+def invoice(invoice_number):
     client = QuickBooks(
         auth_client=auth_client,
         refresh_token=auth_client.refresh_token,
-        company_id=realm_id
+        company_id=realm_id    
     )
-    page = request.args.get('number', default = 1, type = int)
-    invoice_number = '1010'
+
+    # page = request.args.get('number', type = int)
+    # invoice_number = '1010'
     invoices = Invoice.filter(DocNumber=invoice_number, qb=client)
 
-    for invoice in invoices:
-        invoice_dict = invoice.to_dict()
-        invoice_json = json.dumps(invoice_dict)
-        print(invoice_json)
-    return "test"
+    invoice_dicts = [invoice.to_dict() for invoice in invoices]
+    return jsonify(invoice_dicts)
 
 if __name__ == '__main__':
     app.run(debug=True)
