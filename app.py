@@ -76,20 +76,23 @@ def test():
     return auth_client.access_token
 
 
-@app.route('/invoice/<invoice_number>')
-def invoice(invoice_number):
+@app.route('/invoice', methods=['POST'])
+def invoice():
     client = QuickBooks(
         auth_client=auth_client,
-        refresh_token=auth_client.refresh_token,
+        # refresh_token=auth_client.refresh_token,
+        refresh_token=session.get('refresh_token'),
         company_id=realm_id    
     )
 
-    # page = request.args.get('number', type = int)
-    # invoice_number = '1010'
-    invoices = Invoice.filter(DocNumber=invoice_number, qb=client)
+    invoice_number = request.form['invoice_number']
 
+    invoices = Invoice.filter(DocNumber=invoice_number, qb=client)
     invoice_dicts = [invoice.to_dict() for invoice in invoices]
-    return jsonify(invoice_dicts)
+
+    print(jsonify(invoice_dicts))
+    return render_template('index.html', invoice_data=invoice_dicts)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
