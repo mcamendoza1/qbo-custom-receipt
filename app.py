@@ -86,13 +86,20 @@ def invoice():
     )
 
     invoice_number = request.form['invoice_number']
-
+    print(invoice_number)
     invoices = Invoice.filter(DocNumber=invoice_number, qb=client)
     invoice_dicts = [invoice.to_dict() for invoice in invoices]
+    invoice_data = invoice_dicts[0]
+    return render_template('print.html', invoice_data=invoice_data)
 
-    print(jsonify(invoice_dicts))
-    return render_template('index.html', invoice_data=invoice_dicts)
 
+def extract_key_value(json_data, key):
+        """Extracts a specific key-value pair from a JSON data"""
+        if json_data:
+            data = json.loads(json_data)
+            value = data.get(key)
+            return value
+        return None
 
 if __name__ == '__main__':
     app.run(debug=True)
