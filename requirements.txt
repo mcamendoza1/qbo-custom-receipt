@@ -25,3 +25,4 @@ simplejson==3.19.2
 six==1.16.0
 urllib3==2.1.0
 Werkzeug==3.0.1
+setuptools>=65.5.1 # not directly required, pinned by Snyk to avoid a vulnerability
