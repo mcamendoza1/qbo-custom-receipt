@@ -86,15 +86,16 @@ def invoice():
     )
 
     invoice_number = request.form['invoice_number']
-    print(invoice_number)
+    # print(invoice_number)
     invoices = Invoice.filter(DocNumber=invoice_number, qb=client)
     invoice_dicts = [invoice.to_dict() for invoice in invoices]
-    print(invoice_dicts)
+    # print(invoice_dicts)
     invoice_data = invoice_dicts[0]
 
     customers = Customer.filter(Id=invoice_data['CustomerRef']['value'], qb=client)
     customer_dicts = [customer.to_dict() for customer in customers]
     customer_data = customer_dicts[0]
+    # print(customer_data)
 
     return render_template('print.html', invoice_data=invoice_data, customer_data=customer_data)
 

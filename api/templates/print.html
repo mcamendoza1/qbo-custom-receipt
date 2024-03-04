@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Your A4 HTML Document</title>
+    <title>QBO Print Invoice</title>
     <style>
       body {
         font-family: Arial, Helvetica, sans-serif;
@@ -106,8 +106,8 @@
         <div class="content">
           <div>
             <p class="customer-to">{{invoice_data.CustomerRef.name}}</p>
-            <p class="customer-address">{{customer_data.BillAddr}}</p>
-            <p class="customer-address">Address 2</p>
+            <p class="customer-address">{{customer_data.BillAddr.Line1}}</p>
+            <p class="customer-address">.</p>
             <p class="customer-tin">000-000-000-00000</p>
             <p class="customer-bns">Business Style</p>
           </div>
@@ -269,6 +269,8 @@
         <div>
           <p class="prepared-by">JOHN DOE</p>
           <p class="approved-by">JUAN DELA CRUZ</p>
+          <p class="approved-by">{{invoice_data.CustomerRef.name}}</p>
+          <p class="approved-by">{{customer_data}}</p>
         </div>
       </div>
     </body>
