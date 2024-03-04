@@ -42,7 +42,6 @@ def index():
 def login():
     url = auth_client.get_authorization_url([Scopes.ACCOUNTING])
     return redirect(url)
-
 @app.route('/logout')
 def logout():
     # Clear the access token from the session
