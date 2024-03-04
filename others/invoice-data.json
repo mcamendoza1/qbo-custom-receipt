@@ -1,0 +1,186 @@
+{
+    "Id": "13",
+    "SyncToken": "1",
+    "sparse": false,
+    "domain": "QBO",
+    "Deposit": 0,
+    "Balance": 29568.26,
+    "AllowIPNPayment": false,
+    "AllowOnlineCreditCardPayment": false,
+    "AllowOnlineACHPayment": false,
+    "DocNumber": "0003093",
+    "PrivateNote": "",
+    "DueDate": "2024-02-14",
+    "ShipDate": "",
+    "TrackingNum": "",
+    "TotalAmt": 29568.26,
+    "TxnDate": "2024-01-15",
+    "ApplyTaxAfterDiscount": false,
+    "PrintStatus": "NotSet",
+    "EmailStatus": "NotSet",
+    "ExchangeRate": 1,
+    "GlobalTaxCalculation": "TaxExcluded",
+    "InvoiceLink": "",
+    "HomeBalance": 0,
+    "HomeTotalAmt": 0,
+    "FreeFormAddress": false,
+    "EInvoiceStatus": "None",
+    "BillAddr": {
+        "Id": "15",
+        "Line1": "9th Ave. Cor. 31st St. Fort Bonifacio, Bgc Taguig City",
+        "Line2": "",
+        "Line3": "",
+        "Line4": "",
+        "Line5": "",
+        "City": "",
+        "CountrySubDivisionCode": "",
+        "Country": "",
+        "PostalCode": "",
+        "Lat": "",
+        "Long": "",
+        "Note": ""
+    },
+    "ShipAddr": {
+        "Id": "15",
+        "Line1": "9th Ave. Cor. 31st St. Fort Bonifacio, Bgc Taguig City",
+        "Line2": "",
+        "Line3": "",
+        "Line4": "",
+        "Line5": "",
+        "City": "",
+        "CountrySubDivisionCode": "",
+        "Country": "",
+        "PostalCode": "",
+        "Lat": "",
+        "Long": "",
+        "Note": ""
+    },
+    "BillEmail": "None",
+    "BillEmailCc": "None",
+    "BillEmailBcc": "None",
+    "CustomerRef": {
+        "value": "13",
+        "name": "Dean and Deluca Philippines (BGC, Taguig)",
+        "type": ""
+    },
+    "CurrencyRef": {
+        "value": "PHP",
+        "name": "Philippine Peso",
+        "type": ""
+    },
+    "CustomerMemo": "None",
+    "DepartmentRef": "None",
+    "TxnTaxDetail": {
+        "TotalTax": 3168.03,
+        "TxnTaxCodeRef": "None",
+        "TaxLine": [
+            {
+                "Amount": 3168.03,
+                "DetailType": "TaxLineDetail",
+                "TaxLineDetail": {
+                    "PercentBased": true,
+                    "TaxPercent": 12,
+                    "NetAmountTaxable": 26400.23,
+                    "TaxRateRef": {
+                        "value": "11",
+                        "name": "",
+                        "type": ""
+                    }
+                }
+            }
+        ]
+    },
+    "DeliveryInfo": "None",
+    "RecurDataRef": "None",
+    "SalesTermRef": {
+        "value": "3",
+        "name": "",
+        "type": ""
+    },
+    "ShipMethodRef": "None",
+    "TaxExemptionRef": "None",
+    "MetaData": {
+        "CreateTime": "2024-01-16T22:51:13-08:00",
+        "LastUpdatedTime": "2024-02-25T21:53:23-08:00"
+    },
+    "CustomField": [],
+    "Line": [
+        {
+            "Id": "1",
+            "LineNum": 1,
+            "Description": "Kitchen Exhaust Cleaning",
+            "Amount": 23400.23,
+            "DetailType": "SalesItemLineDetail",
+            "LinkedTxn": [],
+            "CustomField": [],
+            "SalesItemLineDetail": {
+                "UnitPrice": 23400.23,
+                "Qty": 1,
+                "ServiceDate": "2024-01-15",
+                "TaxInclusiveAmt": 0,
+                "MarkupInfo": "None",
+                "ItemRef": {
+                    "value": "5",
+                    "name": "Kitchen exhaust cleaning",
+                    "type": ""
+                },
+                "ClassRef": {
+                    "value": "515886",
+                    "name": "Kitchen Exhaust Cleaning",
+                    "type": ""
+                },
+                "TaxCodeRef": {
+                    "value": "11",
+                    "name": "",
+                    "type": ""
+                },
+                "PriceLevelRef": "None"
+            }
+        },
+        {
+            "Id": "2",
+            "LineNum": 2,
+            "Description": "Replacement of Damaged Fiber Insulation",
+            "Amount": 3000,
+            "DetailType": "SalesItemLineDetail",
+            "LinkedTxn": [],
+            "CustomField": [],
+            "SalesItemLineDetail": {
+                "UnitPrice": 3000,
+                "Qty": 1,
+                "ServiceDate": "2024-01-15",
+                "TaxInclusiveAmt": 0,
+                "MarkupInfo": "None",
+                "ItemRef": {
+                    "value": "9",
+                    "name": "Replacement of Damaged Fiber Insulation",
+                    "type": ""
+                },
+                "ClassRef": {
+                    "value": "525503",
+                    "name": "Replacement of Damaged Fiber Insulation",
+                    "type": ""
+                },
+                "TaxCodeRef": {
+                    "value": "11",
+                    "name": "",
+                    "type": ""
+                },
+                "PriceLevelRef": "None"
+            }
+        },
+        {
+            "Id": "None",
+            "LineNum": 0,
+            "Description": "None",
+            "Amount": 26400.23,
+            "DetailType": "SubTotalLineDetail",
+            "LinkedTxn": [],
+            "CustomField": [],
+            "SubtotalLineDetail": "None",
+            "SubTotalLineDetail": {}
+        }
+    ],
+    "LinkedTxn": [],
+    "AllowOnlinePayment": false
+}

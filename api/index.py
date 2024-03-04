@@ -2,6 +2,8 @@ import os
 import json
 from dotenv import load_dotenv
 
+import inflect
+
 # Flask
 from flask import Flask, jsonify, render_template, request, redirect, session
 
@@ -18,6 +20,7 @@ load_dotenv()
 
 app.secret_key = os.getenv("SECRET_KEY")
 
+p = inflect.engine()
 
 auth_client = AuthClient(
     client_id     = os.getenv("CLIENT_ID"),
@@ -97,8 +100,53 @@ def invoice():
     customer_data = customer_dicts[0]
     # print(customer_data)
 
-    return render_template('print.html', invoice_data=invoice_data, customer_data=customer_data)
+    page_data = {}
+    page_data['TotalAmt'] = invoice_data['TotalAmt']
+    page_data['TotalAmtInWords'] = p.number_to_words(invoice_data['TotalAmt'])
+    page_data['TxnDate'] = invoice_data['TxnDate']
+    page_data['CustomerName'] = invoice_data['CustomerRef']['name']
+    page_data['Addr1'] = invoice_data['BillAddr']['Line1']
+    page_data['Addr2'] = return_dot(invoice_data['BillAddr']['Line2'])
+    page_data['BusinessStyle'] = "Commissary | Others"
+    
+    services = []
+    ctr = 0
+    for service in invoice_data['Line']:        
+        if service['Id'] != None:
+            data = {}            
+            data['Id'] = ctr
+            data['Description'] = service['Description']
+            data['Qty'] = service['SalesItemLineDetail']['Qty']
+            data['UnitPrice'] = service['SalesItemLineDetail']['UnitPrice']
+            services.append(data)
+        ctr += 1
 
+    if len(services) < 18:
+        ctr = len(services)
+        print(ctr)
+        for i in range(18 - len(services)):
+            data = {}
+            data['Id'] = ctr
+            data['Description'] = ""
+            data['Qty'] = ""
+            data['UnitPrice'] = ""
+            services.append(data)
+            ctr += 1
+    
+    for service in services:
+        print(service)
+
+    page_data['Services'] = services
+    page_data['TotalTax'] = invoice_data['TxnTaxDetail']['TotalTax']
+    page_json_data = json.loads(json.dumps(page_data))        
+
+    return render_template('print.html', page_json_data=page_json_data, )
+
+def return_dot(str):
+    if len(str) == 0:
+        return "."
+    else:
+        return str
 
 def extract_key_value(json_data, key):
         """Extracts a specific key-value pair from a JSON data"""
@@ -109,4 +157,17 @@ def extract_key_value(json_data, key):
         return None
 
 if __name__ == '__main__':
-    app.run()
+    y = 102345.00
+    y_str = str(y)
+    y_str2 = str(int(y))
+    print(y_str)
+    print(y_str2)
+    last_two_digits = y_str[-2:]
+    print(last_two_digits)
+    # decimal_point = round(y - int(y), 2)
+    # print(decimal_point)
+    x = p.number_to_words(10123).upper()
+    x = x.replace("POINT ZERO", "")
+    x = x.replace(",", "")
+    print(x)
+    # app.run()
