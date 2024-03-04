@@ -5,6 +5,7 @@ click==8.1.7
 ecdsa==0.18.0
 enum-compat==0.0.3
 Flask==3.0.1
+Flask-Login==0.6.3
 future==0.18.3
 idna==3.6
 intuit-oauth==1.2.4
@@ -24,4 +25,3 @@ simplejson==3.19.2
 six==1.16.0
 urllib3==2.1.0
 Werkzeug==3.0.1
-setuptools>=65.5.1 # not directly required, pinned by Snyk to avoid a vulnerability
