@@ -109,4 +109,4 @@ def extract_key_value(json_data, key):
         return None
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
