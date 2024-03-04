@@ -1,6 +1,276 @@
-{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Your A4 HTML Document</title>
+    <style>
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        margin: 0;
+        padding: 0;
+      }
 
-{% block content %}
-    <!-- <p> {{ invoice_data }} </p> -->
-    <p>Test</p>
-{% endblock %}
+      .container {
+        width: 21cm;
+        height: 28.8cm;
+        border: 2px solid #ccc;
+        overflow: hidden;
+      }
+
+      .content {
+        margin-top: 5.5cm;
+        margin-left: 2.5cm;
+        /* background-color: aqua; */
+      }
+
+      .customer-to {
+      }
+
+      .customer-address {
+        margin-top: -0.3cm;
+        font-size: 0.3cm;
+      }
+
+      .customer-tin {
+        margin-top: 0.3cm;
+      }
+
+      .customer-bns {
+        margin-top: 0.3cm;
+        padding-left: 2.1cm;
+        /* background-color: darkgreen; */
+      }
+
+      .invoice-date {
+        /* background-color: darkgreen; */
+        margin-left: 8cm;
+        margin-top: -1.5cm;
+        margin-right: 3.5cm;
+        text-align: right;
+      }
+
+      .particulars-table {
+        /* background-color: aqua;  */
+        margin-left: 1.8cm;
+        margin-top: 2cm;
+        margin-right: 1.8cm;
+        font-size: 0.35cm;
+      }
+
+      .table-header {
+      }
+
+      .table-cell-qty {
+        width: 12.5%;
+      }
+
+      .table-cell-unit {
+        width: 12.5%;
+      }
+
+      .table-cell-particulars {
+        width: 50%;
+      }
+
+      .table-cell-amount {
+        text-align: right;
+        width: 20%;
+      }
+
+      .word-in-amount {
+        margin-left: 1.8cm;
+        margin-top: 0.6cm;
+        text-align: center;
+      }
+
+      .prepared-by {
+        margin-left: 2.5cm;
+        margin-top: 2.7cm;
+      }
+
+      .approved-by {
+        margin-left: 8.2cm;
+        margin-top: -0.9cm;
+        margin-right: 3.5cm;
+      }
+      @media print {
+        #printbtn {
+          display: none;
+        }
+      }
+    </style>
+    <body>
+      <div class="container">
+        <input id ="printbtn" type="button" value="Print this page" onclick="window.print();" >
+        <div class="content">
+          <div>
+            <p class="customer-to">{{invoice_data.CustomerRef.name}}</p>
+            <p class="customer-address">{{customer_data.BillAddr}}</p>
+            <p class="customer-address">Address 2</p>
+            <p class="customer-tin">000-000-000-00000</p>
+            <p class="customer-bns">Business Style</p>
+          </div>
+          <div>
+            <p class="invoice-date">1/24/2024</p>
+          </div>
+        </div>
+        <div class="particulars-table">
+          <table style="width: 100%">
+            <!-- <tr>
+                      <th class="table-cell-qty">QTY</th>
+                      <th class="table-cell-qty">UNIT</th>
+                      <th>PARTICULARS</th>
+                      <th>AMOUNT</th>
+                    </tr> -->
+            <tr>
+              <th class="table-cell-qty"></th>
+              <th class="table-cell-unit"></th>
+              <th class="table-cell-particulars"></th>
+              <th class="table-cell-amount"></th>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>2</td>
+              <td>SUPPLIES</td>
+              <td class="table-cell-amount">P 10,000.00</td>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>2</td>
+              <td>SUPPLIES</td>
+              <td class="table-cell-amount">P 10,000.00</td>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>2</td>
+              <td>SUPPLIES</td>
+              <td class="table-cell-amount">P 10,000.00</td>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>2</td>
+              <td>SUPPLIES</td>
+              <td class="table-cell-amount">P 10,000.00</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td class="table-cell-amount">.</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td class="table-cell-amount">.</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td class="table-cell-amount">.</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td class="table-cell-amount">.</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td class="table-cell-amount">.</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td class="table-cell-amount">.</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td class="table-cell-amount">.</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td class="table-cell-amount">.</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td class="table-cell-amount">.</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td class="table-cell-amount">.</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td class="table-cell-amount">.</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td class="table-cell-amount">.</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td class="table-cell-amount">.</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td class="table-cell-amount">.</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td style="text-align: right">VAT SALES</td>
+              <td class="table-cell-amount">P 10,000.00</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td style="text-align: right">12% VAT</td>
+              <td class="table-cell-amount">P 10,000.00</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td class="table-cell-amount">.</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td class="table-cell-amount" style="height: 0.5cm">Php 40,000.00</td>
+            </tr>
+          </table>
+        </div>
+        <div>
+          <p class="word-in-amount">FOURTY THOUSAND PESOS ONLY</p>
+        </div>
+        <div>
+          <p class="prepared-by">JOHN DOE</p>
+          <p class="approved-by">JUAN DELA CRUZ</p>
+        </div>
+      </div>
+    </body>
+  </head>
+</html>

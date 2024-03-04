@@ -10,6 +10,7 @@ from intuitlib.client import AuthClient
 from intuitlib.enums import Scopes
 from quickbooks import QuickBooks
 from quickbooks.objects.invoice import Invoice
+from quickbooks.objects.customer import Customer 
 
 app = Flask(__name__)
 # Load the stored environment variables
@@ -89,8 +90,14 @@ def invoice():
     print(invoice_number)
     invoices = Invoice.filter(DocNumber=invoice_number, qb=client)
     invoice_dicts = [invoice.to_dict() for invoice in invoices]
+    print(invoice_dicts)
     invoice_data = invoice_dicts[0]
-    return render_template('print.html', invoice_data=invoice_data)
+
+    customers = Customer.filter(Id=invoice_data['CustomerRef']['value'], qb=client)
+    customer_dicts = [customer.to_dict() for customer in customers]
+    customer_data = customer_dicts[0]
+
+    return render_template('print.html', invoice_data=invoice_data, customer_data=customer_data)
 
 
 def extract_key_value(json_data, key):

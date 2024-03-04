@@ -5,67 +5,106 @@
 
     <link href="/static/css/daisy.min.css" rel="stylesheet" type="text/css" />
     <script src="/static/js/tailwind.min.js"></script>
+    <style type="text/css">
+      @media print {
+        #printbtn {
+          display: none;
+        }
+      }
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+
+      .container {
+        width: 21cm;
+        height: 28.8cm;
+        border: 2px solid #ccc;
+        overflow: hidden;
+      }
+
+      .content {
+        margin-top: 5.5cm;
+        margin-left: 2.5cm;
+        /* background-color: aqua; */
+      }
+
+      .customer-to {
+      }
+
+      .customer-address {
+        margin-top: -0.3cm;
+        font-size: 0.3cm;
+      }
+
+      .customer-tin {
+        margin-top: 0.3cm;
+      }
+
+      .customer-bns {
+        margin-top: 0.3cm;
+        padding-left: 2.1cm;
+        /* background-color: darkgreen; */
+      }
+
+      .invoice-date {
+        /* background-color: darkgreen; */
+        margin-left: 8cm;
+        margin-top: -1.5cm;
+        margin-right: 3.5cm;
+        text-align: right;
+      }
+
+      .particulars-table {
+        background-color: aqua;
+        margin-left: 1.8cm;
+        margin-top: 2cm;
+        margin-right: 1.8cm;
+        font-size: 0.35cm;
+      }
+
+      .table-header {
+      }
+
+      .table-cell-qty {
+        width: 12.5%;
+      }
+
+      .table-cell-unit {
+        width: 12.5%;
+      }
+
+      .table-cell-particulars {
+        width: 50%;
+      }
+
+      .table-cell-amount {
+        text-align: right;
+        width: 20%;
+      }
+
+      .word-in-amount {
+        margin-left: 1.8cm;
+        margin-top: 0.6cm;
+        text-align: center;
+      }
+
+      .prepared-by {
+        margin-left: 2.5cm;
+        margin-top: 2.7cm;
+      }
+
+      .approved-by {
+        margin-left: 8.2cm;
+        margin-top: -0.9cm;
+        margin-right: 3.5cm;
+      }
+    </style>
   </head>
   <body class="bg-gray-200">
     <div>
-      <div class="flex justify-center items-center h-screen">
-        {% if session['access_token'] %}
-        <div class="px-4">
-          <div class="card w-96 bg-base-200 shadow-xl">
-            <div class="card-body">
-              <h2 class="card-title">Search Receipt</h2>
-              <p>Please search for invoice number</p>
-              <div class="card-actions justify-end">
-                <form action="/invoice" method="POST">
-
-                  {% if invoice_data %}
-                  <input
-                  type="text"
-                  placeholder={{invoice_data["DocNumber"]}}
-                  name="invoice_number"
-                  class="input input-bordered w-full max-w-xs"
-                />
-                  <button class="btn btn-primary mt-2">Print</button>
-                  {% else %}
-                  <input
-                  type="text"
-                  placeholder="Type here"
-                  name="invoice_number"
-                  class="input input-bordered w-full max-w-xs"
-                />
-                  <button class="btn btn-primary mt-2">Search</button>
-                  {% endif %}                 
-                </form>
-              </div>
-
-            </div>          
-          </div>
-        </div>
-        <!-- <div class='top-10 absolute'>
-          {% if invoice_data %}
-          <p>Data</p>
-          {% endif %}
-        </div> -->
-
-        <button class="btn absolute top-4 right-4" onclick="my_modal_1.showModal()">Sign out</button>
-        <dialog id="my_modal_1" class="modal">
-          <div class="modal-box">
-            <h3 class="font-bold text-lg">Sign out</h3>
-            <p class="py-4">Are your sure you want to sign out?</p>
-            <div class="modal-action">
-              <form method="dialog">
-                <!-- if there is a button in form, it will close the modal -->
-                <button class="btn btn-warning" onclick="location.href='/logout'">Sign out</button>
-                <button class="btn" onclick="my_modal_1.close()">Cancel</button>
-              </form>
-            </div>
-          </div>
-        </dialog>
-
-        {% else %}
-        <button class="btn" onclick="location.href='/login'">Sign In</button>
-        {% endif %}
-      </div>
+      <div class="flex justify-center items-center h-screen">{% block content %}{% endblock %}</div>
     </div>
   </body>
 </html>

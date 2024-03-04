@@ -1,6 +1,47 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>{% block title %} Welcome to FlaskBlog {% endblock %}</h1>
-    <p> {{ content }} </p>
+{% if session['access_token'] %}
+<div class="px-4">
+  <div class="card w-96 bg-base-200 shadow-xl">
+    <div class="card-body">
+      <h2 class="mx-3 card-title">Search Receipt</h2>
+      <p class='mx-3'>Please search for invoice number</p>
+      <div class="card-actions justify-end">
+        <form action="/invoice" method="POST">
+          <input
+            type="text"
+            placeholder="Type here"
+            name="invoice_number"
+            class="input input-bordered w-full max-w-xs mt-2"
+          />
+          <button class="btn btn-primary mt-4">Search</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- <div class='top-10 absolute'>
+  {% if invoice_data %}
+  <p>Data</p>
+  {% endif %}
+</div> -->
+<button class="btn absolute top-4 right-4" onclick="my_modal_1.showModal()">Sign out</button>
+<dialog id="my_modal_1" class="modal">
+  <div class="modal-box">
+    <h3 class="font-bold text-lg">Sign out</h3>
+    <p class="py-4">Are your sure you want to sign out?</p>
+    <div class="modal-action">
+      <form method="dialog">
+        <!-- if there is a button in form, it will close the modal -->
+        <button class="btn btn-warning" onclick="location.href='/logout'">Sign out</button>
+        <button class="btn" onclick="my_modal_1.close()">Cancel</button>
+      </form>
+    </div>
+  </div>
+</dialog>
+
+{% else %}
+<button class="btn" onclick="location.href='/login'">Sign In</button>
+{% endif %}
 {% endblock %}
