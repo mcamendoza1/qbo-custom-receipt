@@ -150,13 +150,13 @@
               <td></td>
               <td></td>
               <td style="text-align: right">VAT SALES</td>
-              <td class="table-cell-amount">P 10,000.00</td>
+              <td class="table-cell-amount">{{ "₱ {:,.2f}".format(i.UnitPrice - i.TotalTax)}}</td>
             </tr>
             <tr>
               <td></td>
               <td></td>
               <td style="text-align: right">12% VAT</td>
-              <td class="table-cell-amount">P 10,000.00</td>
+              <td class="table-cell-amount">{{ "₱ {:,.2f}".format(i.TotalTax)}}</td>
             </tr>
             <tr>
               <td></td>
@@ -168,7 +168,7 @@
               <td></td>
               <td></td>
               <td></td>
-              <td class="table-cell-amount" style="height: 0.5cm">Php 40,000.00</td>
+              <td class="table-cell-amount" style="height: 0.5cm">{{ "₱ {:,.2f}".format(i.TotalAmt)}}</td>
             </tr>
           </table>
         </div>
@@ -176,8 +176,8 @@
           <p class="word-in-amount">{{page_json_data.TotalAmtInWords}}</p>
         </div>
         <div>
-          <p class="prepared-by">JOHN DOE</p>
-          <p class="approved-by">JUAN DELA CRUZ</p>
+          <p class="prepared-by">CLARISSA ESTOLLOSO</p>
+          <p class="approved-by">SUSAN STO. DOMINGO</p>
         </div>
       </div>
     </body>
