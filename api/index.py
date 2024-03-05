@@ -102,7 +102,7 @@ def invoice():
 
     page_data = {}
     page_data['TotalAmt'] = invoice_data['TotalAmt']
-    page_data['TotalAmtInWords'] = p.number_to_words(invoice_data['TotalAmt'])
+    page_data['TotalAmtInWords'] = number_to_words(invoice_data['TotalAmt'])
     page_data['TxnDate'] = invoice_data['TxnDate']
     page_data['CustomerName'] = invoice_data['CustomerRef']['name']
     page_data['Addr1'] = invoice_data['BillAddr']['Line1']
@@ -156,18 +156,23 @@ def extract_key_value(json_data, key):
             return value
         return None
 
+def number_to_words(number):
+    """Converts a number to words"""
+    number_str = str(number)
+    to_number = number_str.split(".")
+    decimal_point = int(to_number[1])
+   
+    if decimal_point != 0:
+        decimal_point = p.number_to_words(decimal_point).upper()
+        decimal_point += " CENTS"
+    else:
+        decimal_point = ""
+    main_number = p.number_to_words(to_number[0]).upper()
+    
+    in_word = f"{main_number} PESOS"
+    if decimal_point != "":
+        in_word += f" AND {decimal_point} ONLY"
+    return in_word
+
 if __name__ == '__main__':
-    y = 102345.00
-    y_str = str(y)
-    y_str2 = str(int(y))
-    print(y_str)
-    print(y_str2)
-    last_two_digits = y_str[-2:]
-    print(last_two_digits)
-    # decimal_point = round(y - int(y), 2)
-    # print(decimal_point)
-    x = p.number_to_words(10123).upper()
-    x = x.replace("POINT ZERO", "")
-    x = x.replace(",", "")
-    print(x)
-    # app.run()
+    app.run()
