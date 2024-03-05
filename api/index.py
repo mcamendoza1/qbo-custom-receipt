@@ -123,7 +123,7 @@ def invoice():
 
     if len(services) < 18:
         ctr = len(services)
-        print(ctr)
+        # print(ctr)
         for i in range(18 - len(services)):
             data = {}
             data['Id'] = ctr
@@ -133,12 +133,14 @@ def invoice():
             services.append(data)
             ctr += 1
     
-    for service in services:
-        print(service)
+    # for service in services:
+    #     print(service)
 
     page_data['Services'] = services
     page_data['TotalTax'] = invoice_data['TxnTaxDetail']['TotalTax']
-    page_data['TaxableAmt'] = invoice_data['TxnTaxDetail']['TaxLine'][0]['TaxLineDetail']['NetAmountTaxable']
+    tax_amount = invoice_data['TotalAmt'] - invoice_data['TxnTaxDetail']['TotalTax']
+    print(tax_amount)
+    page_data['TaxableAmount'] = tax_amount
     page_json_data = json.loads(json.dumps(page_data))        
 
     return render_template('print.html', page_json_data=page_json_data, )
