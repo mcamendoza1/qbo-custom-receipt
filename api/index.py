@@ -138,7 +138,7 @@ def invoice():
 
     page_data['Services'] = services
     page_data['TotalTax'] = invoice_data['TxnTaxDetail']['TotalTax']
-    page_data['TaxableAmt'] = invoice_data['TxnTaxDetail']['TaxLine'][0]['TaxLineDetail']['TaxableAmt']
+    page_data['TaxableAmt'] = invoice_data['TxnTaxDetail']['TaxLine'][0]['TaxLineDetail']['NetAmountTaxable']
     page_json_data = json.loads(json.dumps(page_data))        
 
     return render_template('print.html', page_json_data=page_json_data, )
