@@ -150,13 +150,13 @@
               <td></td>
               <td></td>
               <td style="text-align: right">VAT SALES</td>
-              <td class="table-cell-amount">{{ "₱ {:,.2f}".format(i.TaxableAmount)}}</td>
+              <td class="table-cell-amount">{{ "₱ {:,.2f}".format(page_json_data.TaxableAmount)}}</td>
             </tr>
             <tr>
               <td></td>
               <td></td>
               <td style="text-align: right">12% VAT</td>
-              <td class="table-cell-amount">{{ "₱ {:,.2f}".format(i.TotalTax)}}</td>
+              <td class="table-cell-amount">{{ "₱ {:,.2f}".format(page_json_data.TotalTax)}}</td>
             </tr>
             <tr>
               <td></td>
@@ -168,7 +168,7 @@
               <td></td>
               <td></td>
               <td></td>
-              <td class="table-cell-amount" style="height: 0.5cm">{{ "₱ {:,.2f}".format(i.TotalAmt)}}</td>
+              <td class="table-cell-amount" style="height: 0.5cm">{{ "₱ {:,.2f}".format(page_json_data.TotalAmt)}}</td>
             </tr>
           </table>
         </div>
