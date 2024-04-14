@@ -8,7 +8,7 @@ enum-compat==0.0.3
 Flask==3.0.1
 Flask-Login==0.6.3
 future==0.18.3
-idna==3.6
+idna==3.7
 inflect==7.0.0
 intuit-oauth==1.2.4
 itsdangerous==2.1.2
